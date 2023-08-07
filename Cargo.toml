@@ -1,0 +1,4 @@
+[workspace]
+members = ['sections/*']
+[profile.release]
+panic = 'unwind'
