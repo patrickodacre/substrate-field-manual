@@ -52,7 +52,7 @@ impl frame_system::Config for Test {
 impl pallet_currencydemo::Config for Test {
     type RuntimeEvent = RuntimeEvent;
     type WeightInfo = ();
-    type Currency = Balances;
+    type Balances = Balances;
 }
 
 // Config Balances Pallet

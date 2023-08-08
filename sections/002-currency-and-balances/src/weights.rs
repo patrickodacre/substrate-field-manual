@@ -34,12 +34,26 @@ use core::marker::PhantomData;
 /// Weight functions needed for pallet_currencydemo.
 pub trait WeightInfo {
 	fn transfer() -> Weight;
+	fn transfer_from() -> Weight;
+	fn approve() -> Weight;
 }
 
 /// Weights for pallet_currencydemo using the Substrate node and recommended hardware.
 pub struct SubstrateWeight<T>(PhantomData<T>);
 impl<T: frame_system::Config> WeightInfo for SubstrateWeight<T> {
 	fn transfer() -> Weight {
+		Weight::from_parts(9_000_000, 0)
+			.saturating_add(T::DbWeight::get().reads(1_u64))
+			.saturating_add(T::DbWeight::get().writes(1_u64))
+	}
+
+	fn transfer_from() -> Weight {
+		Weight::from_parts(9_000_000, 0)
+			.saturating_add(T::DbWeight::get().reads(1_u64))
+			.saturating_add(T::DbWeight::get().writes(1_u64))
+	}
+
+	fn approve() -> Weight {
 		Weight::from_parts(9_000_000, 0)
 			.saturating_add(T::DbWeight::get().writes(1_u64))
 	}
@@ -48,6 +62,18 @@ impl<T: frame_system::Config> WeightInfo for SubstrateWeight<T> {
 // For backwards compatibility and tests
 impl WeightInfo for () {
 	fn transfer() -> Weight {
+		Weight::from_parts(9_000_000, 0)
+			.saturating_add(RocksDbWeight::get().reads(1_u64))
+			.saturating_add(RocksDbWeight::get().writes(1_u64))
+	}
+
+	fn transfer_from() -> Weight {
+		Weight::from_parts(9_000_000, 0)
+			.saturating_add(RocksDbWeight::get().reads(1_u64))
+			.saturating_add(RocksDbWeight::get().writes(1_u64))
+	}
+
+	fn approve() -> Weight {
 		Weight::from_parts(9_000_000, 0)
 			.saturating_add(RocksDbWeight::get().writes(1_u64))
 	}
